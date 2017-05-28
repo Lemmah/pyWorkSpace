@@ -1,0 +1,4 @@
+{
+  "testTaxLab.py::CalculateTaxTests::test_it_does_not_accept_integers": true, 
+  "testTaxLab.py::CalculateTaxTests::test_it_throws_an_error_if_any_of_the_inputs_is_non_numeric": true
+}
