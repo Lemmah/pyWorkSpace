@@ -21,7 +21,7 @@ def getMaxMonsters(n, hit, t, h):
 
 
 def getDetails():
-    n, hit, t = input().strip().split(' ')
+    n , hit, t = input().strip().split(' ')
     n, hit, t = [int(n), int(hit), int(t)]
     h = list(map(int, input().strip().split(' ')))
     result = getMaxMonsters(n, hit, t, h)
