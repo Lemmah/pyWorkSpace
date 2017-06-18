@@ -19,4 +19,4 @@ def calcNum():
     return validNum
 
 
-print(calcNum())
+print(", ".join(map(str,calcNum())))

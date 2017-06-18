@@ -8,7 +8,7 @@ Then, the output should be:
 '''
 
 def numFactorials():
-    ''' Get list of numbers from user and return the list of factorials '''
+    ''' Get list of numbers from user and return the list of factorials. '''
     # get the list of numbers from user
     numbersList = [int(num) for num in input("Input list of numbers separated by a space: ").split()]
     # get the list of factorials by computation
@@ -25,4 +25,5 @@ def calcFactorial(num):
         return num * calcFactorial(num -1)
 
 
+# map is a C function so it it is faster than str(num) for num in numFactorials()
 print(", ".join(map(str,numFactorials())))
