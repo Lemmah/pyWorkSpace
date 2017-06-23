@@ -11,3 +11,4 @@ print(binaryLetters)
 joinedList = "".join(binaryLetters)
 print("\nJoined List:")
 print(joinedList)
+
