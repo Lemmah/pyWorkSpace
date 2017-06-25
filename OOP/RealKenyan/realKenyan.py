@@ -18,7 +18,7 @@ class KenyanCitizen:
     # Collect expenditure statistics
     # Country expenditure is calculated here in a citizens class because I think there is a logical connection
     # between the citizen's expenditure and the country's total expenditure
-    countryExpenditure = 0
+    totalExpenditures = 0
 
     def __init__(self, firstName="Kenyan", lastName="Citizen", age=18, homeTown="Unknown", monthlyExpenditure=0, phoneNumber=None):
         ''' Constructing the Kenyan Citizen '''
@@ -40,7 +40,7 @@ class KenyanCitizen:
             KenyanCitizen.old += 1
 
         # Update country expenditure
-        KenyanCitizen.countryExpenditure += monthlyExpenditure
+        KenyanCitizen.totalExpenditures += monthlyExpenditure
 
 
     @property
@@ -90,7 +90,7 @@ class KenyanCitizen:
     @classmethod
     def averageSpend(cls):
         ''' Getting the average's Kenyan Citizen's spending '''
-        return cls.countryExpenditure / (cls.youth + cls.middleAge + cls.old)
+        return cls.totalExpenditures / (cls.youth + cls.middleAge + cls.old)
 
     @classmethod
     def fromString(cls, useString):
@@ -112,11 +112,16 @@ class KenyanCitizen:
         return "{} - {} - {} - {} - {} - {}".format(self.firstName, self.lastName, self.age, self.homeTown, self.monthlyExpenditure, self.phoneNum)
 
 
-Lemayian = KenyanCitizen.fromString("James - Lemayian - 20 - Narok - 1000 - Owns no phone")
 SomeOldCitizen = KenyanCitizen("FatherOf", "Many", 55, "Nairobi", 20000)
-print(KenyanCitizen.countryExpenditure)
+Lemayian = KenyanCitizen.fromString("James - Lemayian - 20 - Narok - 1000 - Owns no phone")
+
+
+''' Development Driven Testing
+print(KenyanCitizen.totalExpenditures)
 print(KenyanCitizen.averageSpend())
-'''
+SomeOldCitizen.phoneNum = "+254700613380"
+print(SomeOldCitizen)
+print(repr(Lemayian))
 print(KenyanCitizen.citizenStats())
 print(Lemayian.phoneNum)
 Lemayian.phoneNum = "0700613380"
@@ -127,3 +132,6 @@ print(Lemayian.phoneNum)
 print(Lemayian)
 print(KenyanCitizen("James", "Nakolah", 23, "Nairobi", 2323, None))
 '''
+
+if __name__ == "__main__":
+    KenyanCitizen()
