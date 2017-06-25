@@ -1,4 +1,4 @@
-# Buzzword: operator overloading
+# Buzzword: operator overloading => where an operator has different implementation depending on it's arguments
 # Double underscore: dunder
 
 # Special methods are also called magic dunder methods.
