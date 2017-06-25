@@ -3,6 +3,7 @@
 # WorkingClass => Employer, Employee.
 
 class KenyanCitizen:
+    ''' A blue print of the Kenyan citizen '''
 
     valueAddedTax = 0.16
     genRevenue = 0 # => the revenue an individual generates for spending
@@ -13,12 +14,15 @@ class KenyanCitizen:
     middleAge = 0
     old = 0
 
-    def __init__(self, firstName="Kenyan", lastName="Citizen", age=18, homeTown="Unknown", monthlyExpenditure=0):
+    def __init__(self, firstName="Kenyan", lastName="Citizen", age=18, homeTown="Unknown", monthlyExpenditure=0, phoneNumber=None):
+        ''' Constructing the Kenyan Citizen '''
         self.firstName = firstName
         self.lastName = lastName
         self.age = age
         self.homeTown = homeTown
         self.monthlyExpenditure = monthlyExpenditure
+        # People consider their phoneNumbers private
+        self.__phoneNumber = phoneNumber
 
         # Update age statistics on every instance
         if self.age < 30:
@@ -30,26 +34,75 @@ class KenyanCitizen:
 
     @property
     def fullName(self):
+        ''' The full name property getter '''
         return "{} {}".format(self.firstName, self.lastName)
 
     @fullName.setter
     def fullName(self, newName):
+        ''' Reseting the names using the full name '''
         self.firstName, self.lastName = newName.split(" ")
 
     @fullName.deleter
     def fullName(self):
+        ''' Deleting the names using full name property '''
         print("Deleted the name!")
         self.firstName, self.lastName = None, None
 
+    @property
+    def phoneNum(self):
+        ''' The phone number property getter '''
+        if self.__phoneNumber is None:
+            return "Owns no phone"
+        return self.__phoneNumber
+
+    @phoneNum.setter
+    def phoneNum(self, phoneNumber):
+        ''' Setting a citizen's phone number '''
+        self.__phoneNumber = phoneNumber
+
+    @phoneNum.deleter
+    def phoneNum(self):
+        ''' Deleting the phone number propery. '''
+        self.__phoneNumber = None
+
     def calcMonthlyTax(self):
+        ''' Calculating the monthly tax revenue for citizen instance '''
         self.genRevenue = self.monthlyExpenditure * valueAddedTax
         return self.genRevenue
 
     @classmethod
     def citizenStats(cls):
+        ''' Formating and returning the citizen stats '''
         return "Young: {}\nMiddle aged: {}\nOld people: {}\n".format(cls.youth, cls.middleAge, cls.old)
 
+    @classmethod
+    def fromString(cls, useString):
+        ''' Alternative constructor from string '''
+        firstName, lastName, age, homeTown, monthlyExpenditure, phoneNum = useString.split(" - ")
+        if phoneNum == "Owns no phone":
+            phoneNum = None
+        return cls(firstName, lastName, int(age), homeTown, int(monthlyExpenditure), phoneNum)
 
-Lemayian = KenyanCitizen("James", "Lemayian", 20, "Narok", 1000)
+    # Special Dunder methods
+    def __repr__(self):
+        ''' A friendlier representation of the Kenyan citizen object instance. '''
+        if self.__phoneNumber is not None:
+            return "KenyanCitizen('{}', '{}', {}, '{}', {}, '{}')".format(self.firstName, self.lastName, self.age, self.homeTown, self.monthlyExpenditure, self.__phoneNumber)
+        return "KenyanCitizen('{}', '{}', {}, '{}', {}, {})".format(self.firstName, self.lastName, self.age, self.homeTown, self.monthlyExpenditure, self.__phoneNumber)
+
+    def __str__(self):
+        ''' An end-user representation of the Kenyan citizen object instance. '''
+        return "{} - {} - {} - {} - {} - {}".format(self.firstName, self.lastName, self.age, self.homeTown, self.monthlyExpenditure, self.phoneNum)
+
+
+Lemayian = KenyanCitizen.fromString("James - Lemayian - 20 - Narok - 1000 - Owns no phone")
 SomeOldCitizen = KenyanCitizen("FatherOf", "Many", 55, "Nairobi", 20000)
 print(KenyanCitizen.citizenStats())
+print(Lemayian.phoneNum)
+Lemayian.phoneNum = "0700613380"
+print(Lemayian.phoneNum)
+
+del Lemayian.phoneNum
+print(Lemayian.phoneNum)
+print(Lemayian)
+print(KenyanCitizen("James", "Nakolah", 23, "Nairobi", 2323, None))
