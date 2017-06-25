@@ -5,6 +5,7 @@
 class KenyanCitizen:
     ''' A blue print of the Kenyan citizen '''
 
+    # 1.0: Class variables => may not affect the instances directly but have a logical connection
     valueAddedTax = 0.16
     genRevenue = 0 # => the revenue an individual generates for spending
     nationality = "Kenyan"
@@ -14,8 +15,14 @@ class KenyanCitizen:
     middleAge = 0
     old = 0
 
+    # Collect expenditure statistics
+    # Country expenditure is calculated here in a citizens class because I think there is a logical connection
+    # between the citizen's expenditure and the country's total expenditure
+    countryExpenditure = 0
+
     def __init__(self, firstName="Kenyan", lastName="Citizen", age=18, homeTown="Unknown", monthlyExpenditure=0, phoneNumber=None):
         ''' Constructing the Kenyan Citizen '''
+        # 1.1 Instance variables: properties of the specific instance of the Kenyan citizen
         self.firstName = firstName
         self.lastName = lastName
         self.age = age
@@ -31,6 +38,10 @@ class KenyanCitizen:
             KenyanCitizen.middleAge += 1
         else:
             KenyanCitizen.old += 1
+
+        # Update country expenditure
+        KenyanCitizen.countryExpenditure += monthlyExpenditure
+
 
     @property
     def fullName(self):
@@ -70,10 +81,16 @@ class KenyanCitizen:
         self.genRevenue = self.monthlyExpenditure * valueAddedTax
         return self.genRevenue
 
+    # 2.0: Class methods => manipulating my class variables to achieve desired effects
     @classmethod
     def citizenStats(cls):
         ''' Formating and returning the citizen stats '''
         return "Young: {}\nMiddle aged: {}\nOld people: {}\n".format(cls.youth, cls.middleAge, cls.old)
+
+    @classmethod
+    def averageSpend(cls):
+        ''' Getting the average's Kenyan Citizen's spending '''
+        return cls.countryExpenditure / (cls.youth + cls.middleAge + cls.old)
 
     @classmethod
     def fromString(cls, useString):
@@ -83,7 +100,7 @@ class KenyanCitizen:
             phoneNum = None
         return cls(firstName, lastName, int(age), homeTown, int(monthlyExpenditure), phoneNum)
 
-    # Special Dunder methods
+    # 3.0: My special dunder methods
     def __repr__(self):
         ''' A friendlier representation of the Kenyan citizen object instance. '''
         if self.__phoneNumber is not None:
@@ -97,6 +114,9 @@ class KenyanCitizen:
 
 Lemayian = KenyanCitizen.fromString("James - Lemayian - 20 - Narok - 1000 - Owns no phone")
 SomeOldCitizen = KenyanCitizen("FatherOf", "Many", 55, "Nairobi", 20000)
+print(KenyanCitizen.countryExpenditure)
+print(KenyanCitizen.averageSpend())
+'''
 print(KenyanCitizen.citizenStats())
 print(Lemayian.phoneNum)
 Lemayian.phoneNum = "0700613380"
@@ -106,3 +126,4 @@ del Lemayian.phoneNum
 print(Lemayian.phoneNum)
 print(Lemayian)
 print(KenyanCitizen("James", "Nakolah", 23, "Nairobi", 2323, None))
+'''
