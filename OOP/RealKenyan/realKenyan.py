@@ -112,8 +112,9 @@ class KenyanCitizen:
         return "{} - {} - {} - {} - {} - {}".format(self.firstName, self.lastName, self.age, self.homeTown, self.monthlyExpenditure, self.phoneNum)
 
 
-SomeOldCitizen = KenyanCitizen("FatherOf", "Many", 55, "Nairobi", 20000)
-Lemayian = KenyanCitizen.fromString("James - Lemayian - 20 - Narok - 1000 - Owns no phone")
+if __name__ == "__main__":
+    SomeOldCitizen = KenyanCitizen("FatherOf", "Many", 55, "Nairobi", 20000)
+    Lemayian = KenyanCitizen.fromString("James - Lemayian - 20 - Narok - 1000 - Owns no phone")
 
 
 ''' Development Driven Testing
@@ -133,5 +134,3 @@ print(Lemayian)
 print(KenyanCitizen("James", "Nakolah", 23, "Nairobi", 2323, None))
 '''
 
-if __name__ == "__main__":
-    KenyanCitizen()

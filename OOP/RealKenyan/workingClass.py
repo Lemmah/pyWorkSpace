@@ -15,11 +15,11 @@ class WorkingClass(KenyanCitizen):
         super().__init__(firstName, lastName, age, homeTown, monthlyExpenditure, phoneNumber)
         self.monthlyEarnings = monthlyEarnings
 
-
-Lemayian = WorkingClass("Regular", "Worker", 22, "Kajiado", 22000, "+254700613380")
-Worker = WorkingClass.fromString("James - Lemayian - 20 - Narok - 1000 - Owns no phone")
-print(Lemayian)
-print(WorkingClass.totalExpenditures)
-print(WorkingClass.citizenStats())
-# Looking at how the inheritance flows
-# help(WorkingClass)
+if __name__ == "__main__":
+    Lemayian = WorkingClass("Regular", "Worker", 22, "Kajiado", 22000, "+254700613380")
+    Worker = WorkingClass.fromString("James - Lemayian - 20 - Narok - 1000 - Owns no phone")
+    print(Lemayian)
+    print(WorkingClass.totalExpenditures)
+    print(WorkingClass.citizenStats())
+    # Looking at how the inheritance flows
+    # help(WorkingClass)
