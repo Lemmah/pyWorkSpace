@@ -24,8 +24,10 @@
 # So donuts(5) returns 'Number of donuts: 5'
 # and donuts(23) returns 'Number of donuts: many'
 def donuts(count):
-  # +++your code here+++
-  return
+  if count >= 10:
+    count = "many"
+  statement = "Number of donuts: {}".format(count)
+  return statement
 
 
 # B. both_ends
@@ -34,9 +36,10 @@ def donuts(count):
 # so 'spring' yields 'spng'. However, if the string length
 # is less than 2, return instead the empty string.
 def both_ends(s):
-  # +++your code here+++
-  return
-
+  newString = ""
+  if len(s) >= 2:
+    newString = s[:2] + s[-2:]
+  return newString
 
 # C. fix_start
 # Given a string s, return a string
@@ -48,8 +51,14 @@ def both_ends(s):
 # Hint: s.replace(stra, strb) returns a version of string s
 # where all instances of stra have been replaced by strb.
 def fix_start(s):
-  # +++your code here+++
-  return
+  first = s[0]
+  new_s = ""
+  for char in s:
+    if char == first:
+      new_s = first + s[1:].replace(char, "*")
+  if len(new_s) == 0:
+    new_s = s
+  return new_s
 
 
 # D. MixUp
@@ -60,8 +69,13 @@ def fix_start(s):
 #   'dog', 'dinner' -> 'dig donner'
 # Assume a and b are length 2 or more.
 def mix_up(a, b):
-  # +++your code here+++
-  return
+  char2_a = a[:2]
+  char2_b = b[:2]
+  a = a[:3].replace(char2_a, char2_b) + a[3:]
+  b = b[:3].replace(char2_b, char2_a) + b[3:]
+  string_list = [a,b]
+  new_string = " ".join(string_list)
+  return new_string
 
 
 # Provided simple test() function used in main() to print
@@ -101,7 +115,7 @@ def main():
 
   print
   print 'mix_up'
-  test(mix_up('mix', 'pod'), 'pox mid')
+  test(mix_up('mixmix', 'podpod'), 'poxmix midpod')
   test(mix_up('dog', 'dinner'), 'dig donner')
   test(mix_up('gnash', 'sport'), 'spash gnort')
   test(mix_up('pezzy', 'firm'), 'fizzy perm')
