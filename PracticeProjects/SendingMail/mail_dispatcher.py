@@ -4,14 +4,21 @@ import smtplib
 import my_credentials
 
 def set_up():
+    ''' Just setting up the smptlib '''
+    print("Welcome to Lemmah console mail dispatcher.")
+    print("Setting up things for you...")
     server = smtplib.SMTP("smtp.gmail.com", 587)
+    # tls protects my password
     server.starttls()
     server.login(my_credentials.my_email, my_credentials.my_pass)
     return server
 
 def dispatcher(server):
-    msg = "This is my message"
-    server.sendmail(my_credentials.my_email, "jnlemayian@gmail.com", msg)
+    ''' sending the email '''
+    print("We're set up!")
+    recepient = input("Enter recepient's email: ")
+    msg = input("Enter your message: ")
+    server.sendmail(my_credentials.my_email, recepient, msg)
     server.quit()
     print("Email sent successfully!")
 
