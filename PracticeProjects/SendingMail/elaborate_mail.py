@@ -39,8 +39,20 @@ class CustomMails:
         text_message = message.as_string()
         server.sendmail(self.from_address, self.to_address, text_message)
         server.quit()
-        return "Message sent successfully!"
+        return "Hooray! Message sent successfully!"
 
 
-test_mail = CustomMails(to_address="jnlemayian@gmail.com", email_subject="Hello World", email_body="This is the body.")
-print(test_mail.send_message())
+# The actual email dispatching function
+def dispatch_mail():
+    ''' Collecting user email details and invoking the CustomMails to send_message. '''
+    print("Welcome to LemmahMail, the console mail dispatcher.")
+    # Collect email details
+    recipient = input("Enter recipient's email address: ")
+    subject = input("What is the subject of the email: ")
+    message = input("Your message: ")
+    # invoke the CustomMails
+    email_object = CustomMails(recipient,subject,message)
+    return email_object.send_message()
+
+# print so as to see the return statement
+print(dispatch_mail())
