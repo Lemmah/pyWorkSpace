@@ -1,10 +1,10 @@
 # smtplib for connecting to gmail servers
 import smtplib
 # formating email
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
+from email.mime.multipart import MIMEMultipart # separating into the many parts
+from email.mime.text import MIMEText # formating text
+from email.mime.base import MIMEBase # adding attachments
+from email import encoders # encoding multimedia attachments to base64
 # importing my credentials, this is a custom script that is ignored by git
 import my_credentials
 
@@ -71,7 +71,7 @@ def dispatch_mail():
     message = input("Your message: ")
     attachments = input("Do you have any attachments? (y/n): ")
     # invoke the CustomMails depending on presence of attachments
-    if attachments.lower() is not "y" or attachments.lower() is not "n":
+    if attachments.lower() != "y" and attachments.lower() != "n":
         print("Please inplement this feature.")
         email_object = CustomMails(recipient, subject, message)
     elif attachments.lower() == "n":
@@ -83,4 +83,12 @@ def dispatch_mail():
     return email_object.send_message()
 
 # print so as to see the return statement
-print(dispatch_mail())
+try:
+    print(dispatch_mail())
+except Exception as e:
+    err_con = str(e).split(" ")
+    if ("Temporary" and "name" and "resolution") in err_con:
+        print("Unable to connect to the internet.")
+    else:
+        print(e)
+    print("Message not sent successfully.\n")
