@@ -66,7 +66,8 @@ def dispatch_mail():
     ''' Collecting user email details and invoking the CustomMails to send_message. '''
     print("Welcome to LemmahMail, the console mail dispatcher.")
     # Collect email details
-    recipient = input("Enter recipient's email address: ")
+    recipient_name = input("Who today? : ")
+    recipient = input("Enter {}'s email address: ".format(recipient_name))
     subject = input("What is the subject of the email: ")
     message = input("Your message: ")
     attachments = input("Do you have any attachments? (y/n): ")
@@ -82,13 +83,16 @@ def dispatch_mail():
         email_object = CustomMails(recipient, subject, message, attachment, attachment_path)
     return email_object.send_message()
 
-# print so as to see the return statement
-try:
-    print(dispatch_mail())
-except Exception as e:
-    err_con = str(e).split(" ")
-    if ("Temporary" and "name" and "resolution") in err_con:
-        print("Unable to connect to the internet.")
-    else:
-        print(e)
-    print("Message not sent successfully.\n")
+if __name__ == "__main__":
+    # print so as to see the return statement
+    try:
+        print(dispatch_mail())
+    except Exception as e:
+        err_con = str(e).split(" ")
+        if ("Temporary" and "name" and "resolution") in err_con:
+            print("Unable to connect to the internet.")
+        elif ("not" and "valid" and "address") in err_con:
+            print(err_con[0][1:-1], "is not a valid email address")
+        else:
+            print(e)
+        print("Ooops! The message has not been sent.\n")
