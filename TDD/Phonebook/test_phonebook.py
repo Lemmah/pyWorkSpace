@@ -17,7 +17,6 @@ class PhonebookTestCase(unittest.TestCase):
         # Test for a success message
         self.assertEqual(save_contact,
                 "Bob has been added to your list of contacts")
-        self.assertIn(self.phonebook.contacts, "Bob")
 
     def test_phonebook_can_lookup_contacts(self):
         """ Assert contacts can be looked up """
